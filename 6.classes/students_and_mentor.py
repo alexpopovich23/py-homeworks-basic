@@ -72,6 +72,31 @@ class Lecturer(Mentor):
             return self.average_grade() < other.average_grade()
         return NotImplemented
 
+    def __le__(self, other):
+        if isinstance(other, Lecturer):
+            return self.average_grade() <= other.average_grade()
+        return NotImplemented
+
+    def __eq__(self, other):
+        if isinstance(other, Lecturer):
+            return self.average_grade() == other.average_grade()
+        return NotImplemented
+
+    def __ne__(self, other):
+        if isinstance(other, Lecturer):
+            return self.average_grade() != other.average_grade()
+        return NotImplemented
+
+    def __gt__(self, other):
+        if isinstance(other, Lecturer):
+            return self.average_grade() > other.average_grade()
+        return NotImplemented
+
+    def __ge__(self, other):
+        if isinstance(other, Lecturer):
+            return self.average_grade() >= other.average_grade()
+        return NotImplemented
+
 
 class Reviewer(Mentor):
     def __init__(self, name, surname):
@@ -135,4 +160,10 @@ another_lecturer = Lecturer('Алексей', 'Алексеев')
 another_lecturer.courses_attached += ['Python']
 best_student.rate_lecturer(another_lecturer, 'Python', 8)
 
-print(cool_lecturer < another_lecturer)  
+
+print(cool_lecturer > another_lecturer)   # на больше
+print(cool_lecturer >= another_lecturer)  # на больше или равно
+print(cool_lecturer == another_lecturer)  # на равенство
+print(cool_lecturer != another_lecturer)  # на неравенство
+print(cool_lecturer < another_lecturer)   # на меньше
+print(cool_lecturer <= another_lecturer)  # на меньше или равно
