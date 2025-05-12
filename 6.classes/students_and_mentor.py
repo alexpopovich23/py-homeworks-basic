@@ -1,4 +1,3 @@
-
 class Student:
     def __init__(self, name, surname, gender):
         self.name = name
@@ -167,3 +166,67 @@ print(cool_lecturer == another_lecturer)  # на равенство
 print(cool_lecturer != another_lecturer)  # на неравенство
 print(cool_lecturer < another_lecturer)   # на меньше
 print(cool_lecturer <= another_lecturer)  # на меньше или равно
+
+#Студенты
+student1 = Student('Мария', 'Петрова', 'женский')
+student1.courses_in_progress += ['Python']
+
+student2 = Student('Сергей', 'Сергеев', 'мужской')
+student2.courses_in_progress += ['Python']
+
+ #Лектора
+lecturer1 = Lecturer('Елена', 'Еленина')
+lecturer1.courses_attached += ['Python']
+
+lecturer2 = Lecturer('Дмитрий', 'Дмитриев')
+lecturer2.courses_attached += ['Python']
+
+# Рецензенты
+reviewer1 = Reviewer('Ольга', 'Ольгина')
+reviewer1.courses_attached += ['Python']
+
+reviewer2 = Reviewer('Андрей', 'Андреев')
+reviewer2.courses_attached += ['Python']
+
+
+reviewer1.rate_student(student1, 'Python', 8)
+reviewer1.rate_student(student1, 'Python', 9)
+reviewer1.rate_student(student2, 'Python', 7)
+reviewer1.rate_student(student2, 'Python', 6)
+
+reviewer2.rate_student(student1, 'Python', 10)
+reviewer2.rate_student(student2, 'Python', 9)
+
+
+student1.rate_lecturer(lecturer1, 'Python', 10)
+student1.rate_lecturer(lecturer2, 'Python', 8)
+
+student2.rate_lecturer(lecturer1, 'Python', 9)
+student2.rate_lecturer(lecturer2, 'Python', 7)
+
+
+def average_student_grade(students, course):
+    total_grades = 0
+    total_students = 0
+    for student in students:
+        if course in student.grades:
+            total_grades += sum(student.grades[course])
+            total_students += len(student.grades[course])
+    return total_grades / total_students if total_students > 0 else 0
+
+
+def average_lecturer_grade(lecturers, course):
+    total_grades = 0
+    total_lecturers = 0
+    for lecturer in lecturers:
+        if course in lecturer.grades:
+            total_grades += sum(lecturer.grades[course])
+            total_lecturers += len(lecturer.grades[course])
+    return total_grades / total_lecturers if total_lecturers > 0 else 0
+
+students_list = [best_student, student1, student2]
+lecturers_list = [cool_lecturer, lecturer1, lecturer2]
+
+
+print(f'Средняя оценка студентов по курсу Python: {average_student_grade(students_list, "Python"):.1f}')
+print(f'Средняя оценка лекторов по курсу Python: {average_lecturer_grade(lecturers_list, "Python"):.1f}')
